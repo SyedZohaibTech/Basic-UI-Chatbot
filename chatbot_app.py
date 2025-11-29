@@ -1,12 +1,9 @@
 import streamlit as st
 import google.generativeai as genai
 from datetime import datetime
-from dotenv import load_dotenv
-import os
 
-# Load API key from .env
-load_dotenv()
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# Directly configure Gemini API key
+genai.configure(api_key="AIzaSyDsm8Rpp9nPzKhHAM9zvCKSRAEJR-c6ABc")  # <-- Replace with your API key
 
 # Model
 model = genai.GenerativeModel("gemini-2.5-flash")
@@ -36,7 +33,6 @@ user_input = st.text_input("You:", placeholder="Type your message...")
 # Send Button
 if st.button("Send"):
     if user_input.strip() != "":
-        
         # Add user message to history
         st.session_state.messages.append(
             {"role": "user", "text": user_input, "time": datetime.now().strftime("%H:%M")}
@@ -63,7 +59,6 @@ if st.button("Send"):
             {"role": "bot", "text": response, "time": datetime.now().strftime("%H:%M")}
         )
 
-# BONUS FEATURE 3: Beautiful Chat Bubbles
 # BONUS FEATURE 3: Beautiful Chat Bubbles
 st.markdown("### 💬 Chat History")
 
